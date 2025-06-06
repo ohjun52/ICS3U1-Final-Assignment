@@ -1,11 +1,11 @@
 import pygame
 import battle
-
-pygame.init()
-screen = pygame.display.set_mode((1200, 700))
+from tool import SCREEN_SIZE
 
 def main():
-	battle.main()
+	pygame.init()
+	scren = pygame.display.set_mode(SCREEN_SIZE)
+	battle.main(scren)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	main()

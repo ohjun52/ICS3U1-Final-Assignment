@@ -1,0 +1,8 @@
+{
+	"1":
+	{
+		"bullet_image": "images/bullet_images/01.png",
+		"speed": 10,
+		"range": 100
+	}
+}

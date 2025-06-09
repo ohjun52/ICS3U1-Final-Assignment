@@ -1,8 +1,11 @@
 {
 	"1":
 	{
-		"bullet_image": "images/bullet_images/01.png",
+		"bullet_image": "images/bullet_images/41.png",
+		"scale": 0.5,
 		"speed": 10,
-		"range": 100
+		"range": 900,
+		"cooldown": 10,
+		"backswing": 5
 	}
 }

@@ -4,7 +4,7 @@ import math
 import pygame
 
 MOUSE_POS = (0, 0)
-SCREEN_SIZE = (800, 600)
+SCREEN_SIZE = (0, 0)
 
 def get_int(intro):
 	while True:
@@ -53,10 +53,6 @@ def correct_in_range(rect):
 		rect.top = 0
 	if rect.bottom > SCREEN_SIZE[1]:
 		rect.bottom = SCREEN_SIZE[1]
-
-def quit_game():
-	if pygame.event.get(pygame.QUIT):
-		sys.exit()
 
 def update_mouse_pos():
 	global MOUSE_POS

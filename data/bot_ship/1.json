@@ -1,0 +1,7 @@
+{
+	"ship_image": "images/ship_images/10.png",
+	"initial_hp": 100,
+	"speed": 10,
+	"warning_range": 1200,
+	"bullet_type": ["1", "2", "3"]
+}

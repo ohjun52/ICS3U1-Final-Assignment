@@ -1,11 +1,32 @@
 {
+	"1p":
+	{
+		"bullet_image": "images/bullet_images/41.png",
+		"scale": 0.5,
+		"damage": 100,
+		"speed": 5,
+		"range": 1800,
+		"cooldown": 20,
+		"backswing": 30
+	},
 	"1":
 	{
 		"bullet_image": "images/bullet_images/41.png",
 		"scale": 0.5,
+		"damage": 10,
+		"speed": 5,
+		"range": 900,
+		"cooldown": 20,
+		"backswing": 30
+	},
+	"2":
+	{
+		"bullet_image": "images/bullet_images/01.png",
+		"scale": 1,
+		"damage": 20,
 		"speed": 10,
 		"range": 900,
-		"cooldown": 10,
-		"backswing": 5
+		"cooldown": 60,
+		"backswing": 30
 	}
 }

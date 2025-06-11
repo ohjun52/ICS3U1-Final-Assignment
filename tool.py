@@ -1,4 +1,3 @@
-import sys
 import json
 import math
 import pygame
@@ -43,6 +42,25 @@ def save_txt(file_name, opr, data):
 def rotate_to_target(original_image, origin_pos, target_pos, head = 0):
 	rotate_angle = math.degrees(math.atan2(origin_pos[1] - target_pos[1], target_pos[0] - origin_pos[0])) - head * 90
 	return pygame.transform.rotate(original_image, rotate_angle)
+
+def calculate_xy_spead(origin_pos, target_pos, speed):
+	x_len = abs(target_pos[0] - origin_pos[0])
+	y_len = abs(target_pos[1] - origin_pos[1])
+	remain_times = math.sqrt(x_len ** 2 + y_len ** 2) / speed
+	if remain_times < 1:
+		return 0, 0, 0
+	x_speed = x_len / remain_times
+	if origin_pos[0] > target_pos[0]:
+		x_speed *= -1
+	y_speed = y_len / remain_times
+	if origin_pos[1] > target_pos[1]:
+		y_speed *= -1
+	return x_speed, y_speed, int(remain_times)
+
+def get_square(center_pos, length):
+	rect = pygame.Rect(0, 0, length, length)
+	rect.center = center_pos
+	return rect
 
 def correct_in_range(rect):
 	if rect.left < 0:

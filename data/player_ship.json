@@ -1,6 +1,6 @@
 {
 	"ship_image": "images/ship_images/1.png",
-	"initial_hp": 100,
+	"initial_hp": 1000,
 	"speed": 10,
-	"bullet_type": ["1", "2", "3"]
+	"bullet_type": ["1p", "2", "3"]
 }

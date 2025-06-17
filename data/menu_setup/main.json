@@ -1,0 +1,9 @@
+{
+	"background_image": "images/background/main.png",
+	"interaction_box":
+	[
+		["New Game", [0.5, 0.5], 36, [255, 255, 0], ["plot", "begin"]],
+		["Continue Game", [0.5, 0.6], 36, [255, 255, 0], ["plot", "begin"]],
+		["Quit Game", [0.5, 0.7], 36, [255, 255, 0], ["", ""]]
+	]
+}

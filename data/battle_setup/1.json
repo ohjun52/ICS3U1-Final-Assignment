@@ -1,5 +1,5 @@
 {
-	"background_image": "",
+	"background_image": "images/background/main.png",
 	"player_ship_initial_pos": [0, 0],
 	"bot_ships":
 	[

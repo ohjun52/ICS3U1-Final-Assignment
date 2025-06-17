@@ -7,10 +7,12 @@ class ImageObject(pygame.sprite.Sprite):
 		super().__init__()
 		self.object = pygame.image.load(path).convert_alpha()
 		self.object = pygame.transform.scale(self.object, (self.object.get_width() * scale, self.object.get_height() * scale))
-		self.rect = self.object.get_rect(center = initial_pos)
+		self.object_rect = self.object.get_rect(center = initial_pos)
+		self.rect = self.object_rect.copy()
 
 	def update(self, screen):
-		screen.blit(self.object, self.rect)
+		self.rect = self.object_rect.copy()
+		screen.blit(self.object, self.object_rect)
 
 class Bullet(ImageObject):
 	BULLET_INFO = tool.read_json("data/bullet_data.json")
@@ -31,13 +33,13 @@ class Bullet(ImageObject):
 		self.bullet_name = bullet_name
 		super().__init__(self.BULLET_INFO[bullet_name]["bullet_image"], initial_pos, self.BULLET_INFO[bullet_name]["scale"])
 		self.object = tool.rotate_to_target(self.object, initial_pos, target_pos)
-		self.rect = self.object.get_rect(center = initial_pos)
+		self.object_rect = self.object.get_rect(center = initial_pos)
 		self.x_speed, self.y_speed, self.remain_times = tool.calculate_xy_spead(initial_pos, target_pos, self.BULLET_INFO[bullet_name]["speed"])
 
 	def move(self):
 		if self.remain_times > 0:
-			self.rect.x += self.x_speed
-			self.rect.y += self.y_speed
+			self.object_rect.x += self.x_speed
+			self.object_rect.y += self.y_speed
 			self.remain_times -= 1
 		else:
 			self.kill()
@@ -51,7 +53,7 @@ class FrontSight(ImageObject):
 		super().__init__(path, tool.MOUSE_POS, 0.1)
 
 	def update(self, screen):
-		self.rect.center = tool.MOUSE_POS
+		self.object_rect.center = tool.MOUSE_POS
 		super().update(screen)
 
 class Ship(ImageObject):
@@ -68,17 +70,22 @@ class Ship(ImageObject):
 
 	def switch_bullet(self, index):
 		self.current_bullet_index = index
-		self.bullet_range_rect = tool.get_square(self.rect.center, Bullet.bullet_range(self.ship_info["bullet_type"][self.current_bullet_index]))
+		self.bullet_range_rect = tool.get_square(self.object_rect.center, Bullet.bullet_range(self.ship_info["bullet_type"][self.current_bullet_index]))
 
 	def rotate(self, target_pos):
-		now_pos = self.rect.center
+		now_pos = self.object_rect.center
 		self.object = tool.rotate_to_target(self.original_ship, now_pos, target_pos, 1)
-		self.rect = self.object.get_rect(center = now_pos)
+		self.object_rect = self.object.get_rect(center = now_pos)
 
 	def attack(self, bullet_list, attack_pos):
-		bullet_list.add(Bullet(self.ship_info["bullet_type"][self.current_bullet_index], self.rect.center, attack_pos))
+		bullet_list.add(Bullet(self.ship_info["bullet_type"][self.current_bullet_index], self.object_rect.center, attack_pos))
 		self.attack_backswing = Bullet.bullet_backswing(self.ship_info["bullet_type"][self.current_bullet_index])
 		self.cooldown_list[self.current_bullet_index] = Bullet.bullet_cooldown(self.ship_info["bullet_type"][self.current_bullet_index])
+
+	def scale_collision_box(self, scale):
+		self.rect.width //= scale
+		self.rect.height //= scale
+		self.rect.center = self.object_rect.center
 
 	def update(self, screen):
 		if self.attack_backswing > 0:
@@ -87,6 +94,7 @@ class Ship(ImageObject):
 			if self.cooldown_list[i] > 0:
 				self.cooldown_list[i] -= 1
 		super().update(screen)
+		self.scale_collision_box(self.ship_info["collision_box_scale"])
 
 class PlayerShip(Ship):
 
@@ -94,24 +102,23 @@ class PlayerShip(Ship):
 
 	def __init__(self, initial_pos):
 		super().__init__("data/player_ship.json", initial_pos)
-		self.in_attack_range = None
+		self.can_attack = None
 
 	def operate(self):
 		pressed_keys = pygame.key.get_pressed()
 		if pressed_keys[pygame.K_w]:
-			self.rect.y -= self.ship_info["speed"]
+			self.object_rect.y -= self.ship_info["speed"]
 		if pressed_keys[pygame.K_s]:
-			self.rect.y += self.ship_info["speed"]
+			self.object_rect.y += self.ship_info["speed"]
 		if pressed_keys[pygame.K_a]:
-			self.rect.x -= self.ship_info["speed"]
+			self.object_rect.x -= self.ship_info["speed"]
 		if pressed_keys[pygame.K_d]:
-			self.rect.x += self.ship_info["speed"]
-		tool.correct_in_range(self.rect)
-		self.bullet_range_rect.center = self.rect.center
-		self.in_attack_range = self.bullet_range_rect.collidepoint(tool.MOUSE_POS)
-		if (pygame.mouse.get_pressed()[0] and
-				not self.cooldown_list[self.current_bullet_index] and not self.attack_backswing
-				and self.in_attack_range):
+			self.object_rect.x += self.ship_info["speed"]
+		tool.correct_in_range(self.object_rect)
+		self.bullet_range_rect.center = self.object_rect.center
+		self.can_attack = (self.bullet_range_rect.collidepoint(tool.MOUSE_POS) and
+						   not self.cooldown_list[self.current_bullet_index] and  not self.attack_backswing)
+		if pygame.mouse.get_pressed()[0] and self.can_attack:
 			self.attack(PlayerShip.BULLET_LIST, tool.MOUSE_POS)
 
 	def update(self, screen):
@@ -143,20 +150,20 @@ class BotShip(Ship):
 		self.PLAYER_RECT = player_rect
 
 	def move(self, target_pos, reverse = False):
-		x_speed, y_speed, temp = tool.calculate_xy_spead(self.rect.center, target_pos, self.ship_info["speed"])
+		x_speed, y_speed, temp = tool.calculate_xy_spead(self.object_rect.center, target_pos, self.ship_info["speed"])
 		if reverse:
 			x_speed *= -1
 			y_speed *= -1
-		self.rect.x += x_speed
-		self.rect.y += y_speed
+		self.object_rect.x += x_speed
+		self.object_rect.y += y_speed
 
 	def wander(self):
 		if not self.wander_remain_times:
 			wander_pos = random.randint(0, tool.SCREEN_SIZE[0]), random.randint(0, tool.SCREEN_SIZE[1])
-			self.wander_x_speed, self.wander_y_speed, self.wander_remain_times = tool.calculate_xy_spead(self.rect.center, wander_pos, self.ship_info["speed"])
+			self.wander_x_speed, self.wander_y_speed, self.wander_remain_times = tool.calculate_xy_spead(self.object_rect.center, wander_pos, self.ship_info["speed"])
 			self.rotate(wander_pos)
-		self.rect.x += self.wander_x_speed
-		self.rect.y += self.wander_y_speed
+		self.object_rect.x += self.wander_x_speed
+		self.object_rect.y += self.wander_y_speed
 		self.wander_remain_times -= 1
 
 	def try_attack(self):
@@ -179,9 +186,24 @@ class BotShip(Ship):
 				self.move(self.PLAYER_RECT.center)
 		else:
 			self.wander()
-		tool.correct_in_range(self.rect)
-		self.warning_range_rect.center = self.rect.center
-		self.stop_tracking_range_rect.center = self.rect.center
-		self.running_range.center = self.rect.center
+		tool.correct_in_range(self.object_rect)
+		self.warning_range_rect.center = self.object_rect.center
+		self.stop_tracking_range_rect.center = self.object_rect.center
+		self.running_range.center = self.object_rect.center
 		self.try_attack()
 		super().update(screen)
+
+class HitEffect:
+	CNT = {"1" : 6}
+
+	def __init__(self, name, pos):
+		self.images_list = []
+		self.images_cnt = self.CNT[name]
+		for i in range(self.images_cnt):
+			self.images_list.append(ImageObject(f"images/hit_effect/{name}/{i}.png", pos, 0.6))
+		self.now_index = 0
+
+
+	def update(self, screen):
+		self.images_list[self.now_index].update(screen)
+		self.now_index = self.now_index + 1

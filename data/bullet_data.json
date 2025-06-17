@@ -1,10 +1,10 @@
 {
 	"1p":
 	{
-		"bullet_image": "images/bullet_images/41.png",
-		"scale": 0.5,
+		"bullet_image": "images/bullet_images/10.png",
+		"scale": 1,
 		"damage": 100,
-		"speed": 5,
+		"speed": 100,
 		"range": 1800,
 		"cooldown": 20,
 		"backswing": 30

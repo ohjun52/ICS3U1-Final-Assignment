@@ -1,8 +1,7 @@
 {
-	"ship_image": "images/ship_images/1.png",
+	"ship_image": "images/ship_images/1B.png",
 	"initial_hp": 10000,
 	"speed": 10,
-	"bullet_type": ["1p", "2", "3"],
-	"collision_box_scale": 4,
-	"rotate_speed": 1
+	"bullet_type": ["player1", "player2", "player3"],
+	"collision_box_scale": 4
 }

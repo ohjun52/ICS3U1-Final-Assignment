@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p12.png",
+	"text": "Your mission is complete. Your spirit becomes starlight, forever guarding this blue planet.",
+	"next": ["menu", "main"],
+	"back": ["plot", "11"]
+}

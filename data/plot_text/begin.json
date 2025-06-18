@@ -1,6 +1,6 @@
 {
-	"background_image": "images/background/main.png",
-	"text": "On the story page, you can click the left mouse button to go to the next page, the right mouse button to go to the previous page, and press Esc at any time to return to the main menu.",
-	"next": ["battle", "1"],
+	"background_image": "images/background/control_intro.png",
+	"text": "On the story page, you can click the left mouse button to go to the next page, the right mouse button to go to the previous page, and press Esc at any time to return to the main menu. In battle, you can use WASD to move, use the left mouse button to attack, and switch attacks using the number keys.",
+	"next": ["plot", "1"],
 	"back": ["menu", "main"]
 }

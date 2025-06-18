@@ -1,0 +1,10 @@
+{
+	"ship_image": "images/ship_images/7.png",
+	"initial_hp": 4000,
+	"speed": 6,
+	"bullet_type": ["elite_attack1"],
+	"collision_box_scale": 2,
+	"warning_range": 2000,
+	"stop_tracking_range": 2000,
+	"running_range": 600
+}

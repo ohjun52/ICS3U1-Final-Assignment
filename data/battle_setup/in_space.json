@@ -1,0 +1,14 @@
+{
+	"background_image": "images/background/battle1.jpg",
+	"player_ship_initial_pos": [0.5, 0.8],
+	"bot_ships":
+	[
+		["solider1", [0.2, 0.2]],
+		["solider1", [0.8, 0.2]],
+		["solider1", [0.5, 0.2]],
+		["solider2", [0.3, 0.5]],
+		["solider2", [0.7, 0.5]]
+	],
+	"win": ["plot", "6"],
+	"lose": ["plot", "battle1_lose"]
+}

@@ -29,6 +29,10 @@ class Bullet(ImageObject):
 	def bullet_backswing(bullet_type):
 		return Bullet.BULLET_INFO[bullet_type]["backswing"]
 
+	@staticmethod
+	def bullet_hit_effect(bullet_type):
+		return Bullet.BULLET_INFO[bullet_type]["hit_effect"]
+
 	def __init__(self, bullet_name, initial_pos, target_pos):
 		self.bullet_name = bullet_name
 		super().__init__(self.BULLET_INFO[bullet_name]["bullet_image"], initial_pos, self.BULLET_INFO[bullet_name]["scale"])
@@ -69,8 +73,9 @@ class Ship(ImageObject):
 		self.bullet_range_rect = tool.get_square(initial_pos, Bullet.bullet_range(self.ship_info["bullet_type"][self.current_bullet_index]))
 
 	def switch_bullet(self, index):
-		self.current_bullet_index = index
-		self.bullet_range_rect = tool.get_square(self.object_rect.center, Bullet.bullet_range(self.ship_info["bullet_type"][self.current_bullet_index]))
+		if index < len(self.ship_info["bullet_type"]):
+			self.current_bullet_index = index
+			self.bullet_range_rect = tool.get_square(self.object_rect.center, Bullet.bullet_range(self.ship_info["bullet_type"][self.current_bullet_index]))
 
 	def rotate(self, target_pos):
 		now_pos = self.object_rect.center
@@ -114,11 +119,16 @@ class PlayerShip(Ship):
 			self.object_rect.x -= self.ship_info["speed"]
 		if pressed_keys[pygame.K_d]:
 			self.object_rect.x += self.ship_info["speed"]
+		if pressed_keys[pygame.K_1] and self.current_bullet_index != 0:
+			self.switch_bullet(0)
+		elif pressed_keys[pygame.K_2] and self.current_bullet_index != 1:
+			self.switch_bullet(1)
+		elif pressed_keys[pygame.K_3] and self.current_bullet_index != 2:
+			self.switch_bullet(2)
 		tool.correct_in_range(self.object_rect)
 		self.bullet_range_rect.center = self.object_rect.center
-		self.can_attack = (self.bullet_range_rect.collidepoint(tool.MOUSE_POS) and
-						   not self.cooldown_list[self.current_bullet_index] and  not self.attack_backswing)
-		if pygame.mouse.get_pressed()[0] and self.can_attack:
+		self.can_attack = self.bullet_range_rect.collidepoint(tool.MOUSE_POS) and not self.attack_backswing
+		if pygame.mouse.get_pressed()[0] and self.can_attack and not self.cooldown_list[self.current_bullet_index]:
 			self.attack(PlayerShip.BULLET_LIST, tool.MOUSE_POS)
 
 	def update(self, screen):
@@ -194,16 +204,20 @@ class BotShip(Ship):
 		super().update(screen)
 
 class HitEffect:
-	CNT = {"1" : 6}
+	info = tool.read_json("data/hit_effect.json")
 
 	def __init__(self, name, pos):
 		self.images_list = []
-		self.images_cnt = self.CNT[name]
+		self.images_cnt = self.info[name][0]
+		self.delay = self.info[name][1]
 		for i in range(self.images_cnt):
 			self.images_list.append(ImageObject(f"images/hit_effect/{name}/{i}.png", pos, 0.6))
 		self.now_index = 0
-
+		self.remain = self.delay
 
 	def update(self, screen):
 		self.images_list[self.now_index].update(screen)
-		self.now_index = self.now_index + 1
+		self.remain -= 1
+		if self.remain <= 0:
+			self.now_index = self.now_index + 1
+			self.remain = self.delay

@@ -1,0 +1,9 @@
+{
+	"background_image": "images/background/main.png",
+	"interaction_box":
+	[
+		["Act II", [0.2, 0.6], 36, [255, 255, 0], ["plot", "6"]],
+		["Act III", [0.2, 0.7], 36, [255, 255, 0], ["plot", "8"]],
+		["Back", [0.2, 0.8], 36, [255, 255, 0], ["menu", "main"]]
+	]
+}

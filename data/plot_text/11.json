@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p11.png",
+	"text": "You shattered the Dark God’s core. You place the Heart of Life upon the altar. The earth awakens. The first leaf breaks through the soil.",
+	"next": ["plot", "12"],
+	"back": ["menu", "main"]
+}

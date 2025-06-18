@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/battle3_lose.png",
+	"text": "You failed to break through. Swallowed by chaos, Spirit 007 fades into the void—creation ends in silence.",
+	"next": ["plot", "10"],
+	"back": ["plot", "10"]
+}

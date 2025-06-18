@@ -20,16 +20,18 @@ class InteractionBox:
 
 class Menu:
 
+	TEXT_FONT = "font/Rolie Twily.otf"
+
 	def __init__(self, name):
 		info = tool.read_json(f"data/menu_setup/{name}.json")
 		self.interaction_list = []
 		self.background = pygame.image.load(info["background_image"]).convert()
 		self.background = pygame.transform.scale(self.background, tool.SCREEN_SIZE)
 		for info in info["interaction_box"]:
-			self.interaction_list.append(InteractionBox(info[0], info[1], info[2], info[3], info[4]))
+			self.interaction_list.append(InteractionBox(info[0], info[1], info[2], info[3], info[4], self.TEXT_FONT))
 		self.return_val = None
 
-	def interact(self, screen):
+	def interact(self):
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
@@ -52,11 +54,11 @@ class Menu:
 				interaction.update(screen)
 			pygame.display.flip()
 			tool.CLOCK.tick(120)
-			self.interact(screen)
+			self.interact()
 		return self.return_val
 
 class Plot:
-	TEXT_FONT = None
+	TEXT_FONT = "font/Emigrate.otf"
 	TEXT_SIZE = 50
 	TEXT_COLOR = (255, 255, 255)
 
@@ -84,7 +86,7 @@ class Plot:
 		self.back_state = info["back"]
 		self.return_val = None
 
-	def interact(self, screen):
+	def interact(self):
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONUP:
 				if event.button == 1:
@@ -108,5 +110,5 @@ class Plot:
 				screen.blit(self.lines[i], (0, blit_height))
 			pygame.display.flip()
 			tool.CLOCK.tick(120)
-			self.interact(screen)
+			self.interact()
 		return self.return_val

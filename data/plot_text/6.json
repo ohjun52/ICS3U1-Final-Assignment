@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p6.png",
+	"text": "You break through the chaos, but Earth is drowned in darkness. No life can be born yet.",
+	"next": ["plot", "7"],
+	"back": ["menu", "main"]
+}

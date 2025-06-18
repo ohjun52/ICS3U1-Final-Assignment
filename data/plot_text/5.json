@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p5.png",
+	"text": "As you head toward Earth, violent tremors ripple through the chaos. The Dark God's army lies in wait, ready to crush you before you arrive. You must break through their ambush to continue your mission. ",
+	"next": ["battle", "in_space"],
+	"back": ["plot", "4"]
+}

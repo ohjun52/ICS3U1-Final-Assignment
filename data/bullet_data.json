@@ -1,32 +1,101 @@
 {
-	"1p":
-	{
-		"bullet_image": "images/bullet_images/10.png",
-		"scale": 1,
-		"damage": 100,
-		"speed": 100,
-		"range": 1800,
-		"cooldown": 20,
-		"backswing": 30
-	},
-	"1":
-	{
-		"bullet_image": "images/bullet_images/41.png",
-		"scale": 0.5,
-		"damage": 10,
-		"speed": 5,
-		"range": 900,
-		"cooldown": 20,
-		"backswing": 30
-	},
-	"2":
+	"player1":
 	{
 		"bullet_image": "images/bullet_images/01.png",
 		"scale": 1,
-		"damage": 20,
+		"damage": 250,
+		"speed": 50,
+		"range": 800,
+		"cooldown": 30,
+		"backswing": 10,
+		"hit_effect": "1"
+	},
+	"player2":
+	{
+		"bullet_image": "images/bullet_images/26.png",
+		"scale": 0.7,
+		"damage": 450,
+		"speed": 15,
+		"range": 1400,
+		"cooldown": 60,
+		"backswing": 30,
+		"hit_effect": "1"
+	},
+	"player3":
+	{
+		"bullet_image": "images/bullet_images/62.png",
+		"scale": 1,
+		"damage": 950,
+		"speed": 6,
+		"range": 1800,
+		"cooldown": 120,
+		"backswing": 60,
+		"hit_effect": "1"
+	},
+	"solider_attack1":
+	{
+		"bullet_image": "images/bullet_images/02.png",
+		"scale": 1,
+		"damage": 100,
 		"speed": 10,
 		"range": 900,
 		"cooldown": 60,
-		"backswing": 30
+		"backswing": 30,
+		"hit_effect": "2"
+	},
+	"solider_attack2":
+	{
+		"bullet_image": "images/bullet_images/67.png",
+		"scale": 1,
+		"damage": 400,
+		"speed": 50,
+		"range": 200,
+		"cooldown": 120,
+		"backswing": 60,
+		"hit_effect": "2"
+	},
+	"elite_attack1":
+	{
+		"bullet_image": "images/bullet_images/64.png",
+		"scale": 1,
+		"damage": 1000,
+		"speed": 6,
+		"range": 2000,
+		"cooldown": 240,
+		"backswing": 120,
+		"hit_effect": "2"
+	},
+	"elite_attack2":
+	{
+		"bullet_image": "images/bullet_images/23.png",
+		"scale": 0.7,
+		"damage": 250,
+		"speed": 8,
+		"range": 1200,
+		"cooldown": 60,
+		"backswing": 30,
+		"hit_effect": "2"
+	},
+	"boss_attack1":
+	{
+		"bullet_image": "images/bullet_images/41.png",
+		"scale": 0.7,
+		"damage": 65,
+		"speed": 12,
+		"range": 800,
+		"cooldown": 30,
+		"backswing": 10,
+		"hit_effect": "2"
+	},
+	"boss_attack2":
+	{
+		"bullet_image": "images/bullet_images/67.png",
+		"scale": 1.5,
+		"damage": 500,
+		"speed": 1,
+		"range": 1200,
+		"cooldown": 1200,
+		"backswing": 120,
+		"hit_effect": "2"
 	}
 }

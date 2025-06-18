@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p2.png",
+	"text": "To give birth to life, the Creator divided into seven divine spirits and sent them to Earth.",
+	"next": ["plot", "3"],
+	"back": ["plot", "1"]
+}

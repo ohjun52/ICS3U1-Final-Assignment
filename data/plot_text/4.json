@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p4.png",
+	"text": "You are the final spirit-Number 007. With the Heart of Life in hand, your mission is to finish the creation of life.",
+	"next": ["plot", "5"],
+	"back": ["plot", "3"]
+}

@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p8.png",
+	"text": "The Heart of Life guides you to the ancient altar - built by Spirit 006, now under the Dark God's control.",
+	"next": ["plot", "9"],
+	"back": ["menu", "main"]
+}

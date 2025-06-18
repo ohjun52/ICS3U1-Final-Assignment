@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p7.png",
+	"text": "You arrive on Earth, but find only silence and darkness. The mountains are still, the forests lifeless - no sign of life remains. Only by driving back the darkness can the Heart of Life awaken the sleeping world.",
+	"next": ["battle", "on_earth"],
+	"back": ["plot", "6"]
+}

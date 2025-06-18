@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p9.png",
+	"text": "You reach Earth's final sacred place - a continent suspended in the sky. Here lies the Altar of Life, once built by Spirit 006. Now, it is shrouded in darkness, claimed by the Dark God. Only by defeating him can you awaken the Heart of Life at this holy site.",
+	"next": ["plot", "10"],
+	"back": ["plot", "8"]
+}

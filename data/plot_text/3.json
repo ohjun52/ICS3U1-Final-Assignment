@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p3.png",
+	"text": "Spirit 006 was destroyed by the Dark God-born from chaos-after building the altar of life.",
+	"next": ["plot", "4"],
+	"back": ["plot", "2"]
+}

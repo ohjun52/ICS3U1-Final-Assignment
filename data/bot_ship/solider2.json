@@ -1,0 +1,10 @@
+{
+	"ship_image": "images/ship_images/6.png",
+	"initial_hp": 2000,
+	"speed": 20,
+	"bullet_type": ["solider_attack2"],
+	"collision_box_scale": 1.5,
+	"warning_range": 1600,
+	"stop_tracking_range": 100,
+	"running_range": 0
+}

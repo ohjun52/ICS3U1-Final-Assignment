@@ -1,0 +1,6 @@
+{
+	"background_image": "images/background/p10.png",
+	"text": "As you step onto the altar, the air turns still and cold. A towering shadow descends from the sky. She is the Dark God - the will of chaos, the enemy of life itself. She has been waiting for you.",
+	"next": ["battle", "boss"],
+	"back": ["plot", "8"]
+}

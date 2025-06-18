@@ -1,4 +1,3 @@
-import sys
 import tool
 import pygame
 import pygame_class

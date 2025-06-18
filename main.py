@@ -8,6 +8,7 @@ def main():
 	screen_info = pygame.display.Info()
 	tool.SCREEN_SIZE = (screen_info.current_w, screen_info.current_h)
 	screen = pygame.display.set_mode(tool.SCREEN_SIZE, pygame.NOFRAME)
+	pygame.display.set_caption("The Seventh Light")
 	state = ["menu", "main"]
 	while True:
 		if state[0] == "menu":
